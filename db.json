@@ -1,0 +1,92 @@
+{
+  "products": [
+    {
+      "productName": "Floating Desk",
+      "productPrice": "3400$",
+      "productImage": "https://i.pinimg.com/564x/5a/82/40/5a82404ef7bbba98db6f7c18fc725ac6.jpg",
+      "productAddres": "Азия молл",
+      "id": 1,
+      "productAddress": "Eurasia Mall"
+    },
+    {
+      "productName": "Kitchen",
+      "productPrice": "30000$",
+      "productImage": "https://i.pinimg.com/564x/f6/c2/55/f6c2557cf01b464d0692e9ed2e2979f3.jpg",
+      "productAddres": "Азия молл",
+      "id": 2,
+      "productAddress": "Eurasia Mall"
+    },
+    {
+      "productName": "Sink",
+      "productPrice": "10000$",
+      "productImage": "https://i.pinimg.com/564x/ff/59/88/ff5988a3baf222226c3f3d0f829bf927.jpg",
+      "productAddres": "АЗия молл",
+      "id": 4,
+      "productAddress": "Eurasia Mall"
+    },
+    {
+      "productName": "Sofa",
+      "productPrice": "30000$",
+      "productImage": "https://i.pinimg.com/564x/df/a8/1b/dfa81b347a16fea624bff63f4bbabf0e.jpg",
+      "productAddres": "Азия молл",
+      "id": 5,
+      "productAddress": "Eurasia Mall"
+    },
+    {
+      "productName": "Corner shelves",
+      "productPrice": "2300$",
+      "productImage": "https://i.pinimg.com/564x/9b/18/c9/9b18c9cb939a724fc4fa3d47a01e84f9.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 6
+    },
+    {
+      "productName": "Sofa",
+      "productPrice": "3000$",
+      "productImage": "https://i.pinimg.com/564x/5b/91/93/5b9193391c4bb586026087e2f6a65f80.jpg",
+      "productAddres": "Eurasia  Mall",
+      "id": 7
+    },
+    {
+      "productName": "Makeup Vanity Table with Flip Top Mirror",
+      "productPrice": "4000$",
+      "productImage": "https://i.pinimg.com/564x/39/f8/c2/39f8c2a073377f65bfc20fd75c4b15b4.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 8
+    },
+    {
+      "productName": "Makeup Vanity Set Retracted Dressing Table",
+      "productPrice": "4100$",
+      "productImage": "https://i.pinimg.com/736x/a9/39/28/a93928b72bc829c195a7aca8dea3b533.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 9
+    },
+    {
+      "productName": "Round Coffee Table",
+      "productPrice": "500$",
+      "productImage": "https://i.pinimg.com/564x/27/8b/7d/278b7d1e6a55fcc81ca6c04b1405f510.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 10
+    },
+    {
+      "productName": "Coffee Table",
+      "productPrice": "5600$",
+      "productImage": "https://i.pinimg.com/736x/40/83/98/408398f2b9d63cabc934849a544142f2.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 11
+    },
+    {
+      "productName": "Chair",
+      "productPrice": "2300$",
+      "productImage": "https://i.pinimg.com/564x/80/69/ea/8069ea3cb8cd38e8cf920a183e4d2c12.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 12
+    },
+    {
+      "productName": "Mirror",
+      "productPrice": "800$",
+      "productImage": "https://i.pinimg.com/564x/d4/07/aa/d407aa9d0075c7da8d2add405a30a4a9.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 13
+    }
+  ]
+}
