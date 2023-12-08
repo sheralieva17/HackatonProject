@@ -19,7 +19,7 @@
     <!-- navbar start -->
     <nav class="navbar">
       <div class="navbar-logo">
-        <img src="./images/logo_CH.jpg" alt="logo" />
+        <img src="./images/CH-logo.svg" alt="logo" />
         <span>CozyHome</span>
       </div>
       <ul class="navbar_links">
@@ -39,8 +39,8 @@
           ><img id="SearchIcon" src="./images/icons_search.svg" alt=""
         /></a>
         <input type="text" id="searchInput" placeholder="Search..." />
-        <a href="#"
-          ><img id="favorited" src="./images/icons_heart.svg" alt=""
+        <a href="#" onclick="displayFavoritesModal()"
+          ><img id="favorites" src="./images/icons_heart.svg" alt=""
         /></a>
         <a href="#" id="basket"
           ><img src="./images/icon-basket.svg" alt=""
@@ -59,8 +59,7 @@
             furniture in Bishkek. We offer a wide range of stylish and quality
             furniture to meet all your interior design needs.
           </p>
-          <div class="buttons-container">
-            <button class="btnBuy">Buy Now</button>
+          <div class="buttons-container"> 
             <button class="btnAdd">Add Product</button>
           </div>
         </div>
@@ -85,13 +84,27 @@
     <!-- Секция "About" -->
     <section id="about">
       <div class="about-section">
+        <div class="about-block">
         <h2>About Us</h2>
         <p>
-          Welcome to our store! We aim to provide high-quality products and
-          excellent service to our customers.
+          Welcome to CozyHome, where style meets comfort and quality! We are dedicated to providing high-class furniture that transforms your home into a cozy and stylish space.
         </p>
-        <p>Our mission is to...</p>
-        <!-- Другие абзацы и контент о вашей компании -->
+      </div>
+      <div class="about-block">
+        <h2>Our Story</h2>
+        <p>CozyHome was founded with the aim of offering customers the opportunity to purchase top-quality furniture at affordable prices. Our team embarked on this journey in 2023, and since then, we've been striving to make furniture shopping simpler, more convenient, and more enjoyable for our clients.</p>
+      </div>
+      
+      <div class="about-block">
+        <h2>Our Service</h2>
+        <p>We place great emphasis on our customers' satisfaction. A flexible exchange and return system, quality product guarantees, and attentive service are what make us your reliable partners in the world of furniture.</p>
+      </div>
+      <div class="about-block">
+        <h2>Our Achievements</h2>
+        <p>We take pride in our achievements in the furniture manufacturing sphere and customer service. Awards and positive feedback from our satisfied customers affirm our steadfast commitment to quality and professionalism.
+
+          CozyHome is more than just furniture.</p>
+        </div>
       </div>
     </section>
     <!-- slides start -->
@@ -208,40 +221,36 @@
       <button class="prevBtn">Previous</button>
       <button class="nextBtn">Next</button>
     </div>
+    <!-- сcontact us -->
     <section class="section-4" id="contact">
       <div class="container5">
         <div class="form">
           <h3>CONTACT WITH US</h3>
           <hr />
           <p>Welcome to chat!</p>
-
+    
           <form class="form_inputs">
-            <span>Username</span>
-            <input type="text" placeholder="Enter your name" />
-          </br>
-            <span>Password</span>
-            <input
-              class="form_input_last"
-              type="text"
-              placeholder="Enter your password"
-            />
-        </br>
-        <span>Message</span>
-            <input type="text" placeholder="Enter your meassage" />
-          </br>
-
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your name" /><br />
+    
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" /><br />
+    
+            <label for="message">Message</label>
+            <input type="text" id="message" placeholder="Enter your message" /><br />
+    
+            <button type="submit">Send</button>
+    
+            <span class="Register">
+              How to log on? 
+              <strong>Register </br></strong>
+            </span>
+            <a style="color: bisque;" href="https://instagram.com/qwarllx?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
           </form>
-          <span class="Register"
-            >How to log on?
-            <strong>Register </br></strong></span
-          >
-          <a style="color: bisque;"href="https://instagram.com/qwarllx?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram </a>
-          
         </div>
-        
       </div>
-     
     </section>
+    
     <!-- PAGINATION FINISH -->
     <!-- Избранные -->
     <div id="favoritesList">

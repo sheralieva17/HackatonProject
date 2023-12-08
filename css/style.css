@@ -109,7 +109,6 @@
   /* Добавление отступа сверху между кнопками и содержимым */
 }
 
-.btnBuy,
 .btnAdd:not(.heart-icon) {
   padding: 25px 40px;
   gap: 10px;
@@ -128,7 +127,6 @@
   border-radius: 15px;
 }
 
-.btnBuy:hover,
 .btnAdd:hover {
   /* ... (ваш текущий стиль для состояния hover) ... */
   background-color: #ffe600;
@@ -410,8 +408,8 @@ button:hover {
 }
 .modal-content3 {
   position: absolute;
-  top: 51%;
-  left: 42%;
+  top: 57%;
+  left: 43%;
   transform: translate(-50%, -50%);
   background-color: #b88e2f;
   padding: 19px;
@@ -425,12 +423,12 @@ button:hover {
   top: 1px;
   right: 9px;
   font-size: 30px;
-  cursor: pointer;
   color: white;
   border: none;
 }
 .close3:hover {
   background-color: #eeaa0a;
+  cursor: pointer;
 }
 /* registration finish */
 /* стили для карточек */
@@ -561,7 +559,7 @@ form hr {
   padding: 10px 20px;
   margin: 0 5px;
   background-color: #b88e2f;
-  color: #fff;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -626,28 +624,44 @@ form hr {
 }
 
 .about-section {
-  max-width: 800px;
+  max-width: 100%;
+  height: 500px;
   margin: 0 auto;
+}
+.about-block {
+  border: 1px solid #ccc; /* Добавление границы между блоками */
+  padding: 20px; /* Внутренний отступ в блоке для создания пространства между заголовком и текстом */
+  margin-bottom: 20px; /* Отступ снизу между блоками */
+  width: 300px;
+  display: inline-block; /* Располагаем заголовок и текст горизонтально друг за другом */
+  vertical-align: top; /* Выравниваем элементы по верхнему краю */
+  /* Задаем ширину каждого элемента блока */
+  box-sizing: border-box;
 }
 
 .about-section h2 {
+  margin-top: 0;
   font-size: 2em;
   margin-bottom: 20px;
-  color: #333;
+  color: goldenrod;
   font-family: Poppins;
 }
 
+.about-block h2 {
+  border-bottom: 1px solid #ccc; /* Граница под заголовком */
+  padding-bottom: 10px; /* Отступ между заголовком и текстом */
+}
 .about-section p {
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.6;
   color: #555;
-  font-family: Popppins;
+  font-family: Poppins;
 }
 .section-4 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: papayawhip;
+  color: rgb(224, 169, 18);
   background-image: url(../images/bg.png);
   background-repeat: no-repeat;
   background-size: cover;

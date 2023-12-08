@@ -4,33 +4,22 @@
       "productName": "Floating Desk",
       "productPrice": "3400$",
       "productImage": "https://i.pinimg.com/564x/5a/82/40/5a82404ef7bbba98db6f7c18fc725ac6.jpg",
-      "productAddres": "Азия молл",
-      "id": 1,
-      "productAddress": "Eurasia Mall"
+      "productAddres": "Eurasia Mall",
+      "id": 1
     },
     {
       "productName": "Kitchen",
       "productPrice": "30000$",
       "productImage": "https://i.pinimg.com/564x/f6/c2/55/f6c2557cf01b464d0692e9ed2e2979f3.jpg",
-      "productAddres": "Азия молл",
-      "id": 2,
-      "productAddress": "Eurasia Mall"
-    },
-    {
-      "productName": "Sink",
-      "productPrice": "10000$",
-      "productImage": "https://i.pinimg.com/564x/ff/59/88/ff5988a3baf222226c3f3d0f829bf927.jpg",
-      "productAddres": "АЗия молл",
-      "id": 4,
-      "productAddress": "Eurasia Mall"
+      "productAddres": "Eurasia Mall",
+      "id": 2
     },
     {
       "productName": "Sofa",
       "productPrice": "30000$",
       "productImage": "https://i.pinimg.com/564x/df/a8/1b/dfa81b347a16fea624bff63f4bbabf0e.jpg",
-      "productAddres": "Азия молл",
-      "id": 5,
-      "productAddress": "Eurasia Mall"
+      "productAddres": "Eurasia Mall",
+      "id": 5
     },
     {
       "productName": "Corner shelves",
@@ -87,6 +76,13 @@
       "productImage": "https://i.pinimg.com/564x/d4/07/aa/d407aa9d0075c7da8d2add405a30a4a9.jpg",
       "productAddres": "Eurasia Mall",
       "id": 13
+    },
+    {
+      "productName": "Chair",
+      "productPrice": "900$",
+      "productImage": "https://i.pinimg.com/564x/be/23/06/be2306813fd890ed56f27c307f9ce341.jpg",
+      "productAddres": "Eurasia Mall",
+      "id": 14
     }
   ]
 }

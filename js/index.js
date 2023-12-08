@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const API = "http://localhost:8080/products";
   let data = [];
-  let btnBuy = document.querySelector(".btnBuy");
   const addProductModal = document.getElementById("addProductModal");
   const sectionProducts = document.querySelector(".sectionProducts");
   const inpName = document.getElementById("inpName");
@@ -32,118 +31,127 @@ document.addEventListener("DOMContentLoaded", function () {
   // Скрыть все слайды
   function hideSlides() {
     slides.forEach((slide) => {
-      slide.style.display = "none";
+      slide.style.display = "none"; // Устанавливаем стиль display в "none" для каждого слайда, скрывая их
     });
   }
   // Показать текущий слайд
   function showSlide(index) {
-    hideSlides();
-    slides[index].style.display = "flex";
+    hideSlides(); // Сначала скрываем все слайды
+    slides[index].style.display = "flex"; // Затем показываем текущий слайд, устанавливая стиль display в "flex"
   }
 
   // Переключение на предыдущий слайд
   function prevSlide() {
-    currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
-    showSlide(currentSlide);
+    currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1; // Проверяем, если текущий слайд первый, то устанавливаем currentSlide на последний слайд, иначе уменьшаем на 1
+    showSlide(currentSlide); // Показываем предыдущий слайд
   }
 
   // Переключение на следующий слайд
   function nextSlide() {
-    currentSlide = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
-    showSlide(currentSlide);
+    currentSlide = currentSlide === slides.length - 1 ? 0 : currentSlide + 1; // Проверяем, если текущий слайд последний, то устанавливаем currentSlide на первый слайд, иначе увеличиваем на 1
+    showSlide(currentSlide); // Показываем следующий слайд
   }
 
   // События кнопок для переключения слайдов
-  prevButton.addEventListener("click", prevSlide);
-  nextButton.addEventListener("click", nextSlide);
+  prevButton.addEventListener("click", prevSlide); // Добавляем обработчик события "click" на кнопку prevButton, чтобы переключаться на предыдущий слайд при клике
+  nextButton.addEventListener("click", nextSlide); // Добавляем обработчик события "click" на кнопку nextButton, чтобы переключаться на следующий слайд при клике
 
   // Показать первый слайд при загрузке страницы
   showSlide(currentSlide);
-
-  let closeBtn = document.getElementsByClassName("close")[0];
-  let addBtn = document.querySelector(".addBtn");
-  let modal = document.querySelector("#addProductModal");
+  // Получаем ссылку на элементы DOM
+  let closeBtn = document.getElementsByClassName("close")[0]; // Получаем первый элемент с классом "close"
+  let addBtn = document.querySelector(".addBtn"); // Получаем элемент с классом "addBtn"
+  let modal = document.querySelector("#addProductModal"); // Получаем элемент с id "addProductModal"
 
   // Открываем модальное окно при клике на кнопку "Добавить продукт"
   btnAdd.onclick = function () {
-    modal.style.display = "block";
+    modal.style.display = "block"; // Устанавливаем стиль отображения "block", чтобы показать модальное окно
   };
 
   // Закрываем модальное окно при клике на кнопку "Закрыть" (иконка X)
   closeBtn.onclick = function () {
-    modal.style.display = "none";
+    modal.style.display = "none"; // Устанавливаем стиль отображения "none", чтобы скрыть модальное окно
   };
 
   // Закрываем модальное окно при клике вне его области
   window.onclick = function (event) {
     if (event.target == modal) {
-      modal.style.display = "none";
+      modal.style.display = "none"; // Если клик был вне модального окна, скрываем его
     }
   };
 
+  // Добавляем обработчик события "click" на кнопку "Добавить"
   addBtn.addEventListener("click", () => {
+    // Проверяем, заполнены ли все поля
     if (
-      //Проверка на заполненность полей
       !inpName.value.trim() ||
       !inpPrice.value.trim() ||
       !inpImage.value.trim() ||
       !inpAddress.value.trim()
     ) {
-      alert("Заполните все поля");
+      alert("Заполните все поля"); // Выводим сообщение, если не все поля заполнены
       return;
     }
-    //Создаем новый обьект, куда добавляем значения наших инпутов(Создание новой книги)
+
+    // Создаем новый объект с данными из инпутов
     let newProduct = {
       productName: inpName.value,
       productPrice: inpPrice.value,
       productImage: inpImage.value,
       productAddres: inpAddress.value,
     };
-    creatProducts(newProduct);
-    readProducts();
+
+    creatProducts(newProduct); // Вызываем функцию для создания нового продукта
+    readProducts(); // Вызываем функцию для чтения продуктов (возможно, это обновление списка продуктов)
   });
-  //!================CREATE=================
+  //!====================CREATE=====================
+  // Асинхронная функция для создания нового продукта
   async function creatProducts(product) {
     try {
+      // Отправляем POST-запрос на сервер с данными о продукте
       const response = await fetch(API, {
         method: "POST",
         headers: {
-          "Content-type": "application/json; charset=utf-8",
+          "Content-type": "application/json; charset=utf-8", // Устанавливаем заголовки запроса
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(product), // Преобразуем объект продукта в формат JSON и отправляем его в теле запроса
       });
 
+      // Проверяем, успешно ли выполнен запрос
       if (!response.ok) {
-        throw new Error("Ошибка при создании продукта");
+        throw new Error("Ошибка при создании продукта"); // Выбрасываем ошибку, если запрос завершился неудачно
       }
 
-      // Убедимся, что запрос завершился успешно, затем очистим инпуты и обновим отображение продуктов
+      // Если запрос завершился успешно, очищаем значения полей ввода и скрываем модальное окно
       inpName.value = "";
       inpPrice.value = "";
       inpImage.value = "";
       inpAddress.value = "";
       modal.style.display = "none";
-      // Вызываем функцию для обновления отображения продуктов
+
+      // Вызываем функцию для обновления отображения продуктов после успешного создания нового продукта
       readProducts();
     } catch (error) {
-      console.error("Ошибка:", error);
+      console.error("Ошибка:", error); // В случае ошибки выводим сообщение об ошибке в консоль
     }
   }
-  //!=====================READ========================
-
+  //!==================READ====================================
+  // Асинхронная функция для получения списка продуктов
   async function readProducts() {
     try {
       const response = await fetch(
         `${API}?q=${searchValue}&_page=${currentPage}&_limit=4`
-      );
-      const data = await response.json(); // Получение данных из db.json()
+      ); // Отправляем GET-запрос на сервер для получения списка продуктов с определенной пагинацией и параметрами поиска
 
-      // Очищаем содержимое элемента .sectionProducts
+      const data = await response.json(); // Получаем данные в формате JSON из ответа сервера
+
+      // Очищаем содержимое элемента .sectionProducts перед добавлением новых продуктов
       sectionProducts.innerHTML = "";
 
-      // Добавляем продукты
+      // Добавляем продукты на страницу
       data.forEach((item) => {
         sectionProducts.innerHTML += `
+          <!-- Вывод информации о каждом продукте -->
           <div class="detailsCard card" style="width: 19rem">
             <img
               id="${item.id}"
@@ -152,164 +160,184 @@ document.addEventListener("DOMContentLoaded", function () {
               class="card-img-top detailsCard"
               style="height: 280px"
             />
-
+  
             <div class="card-body">
-            <button class="add-to-favorites">
-                <img src="./images/heart.png" alt="" class="heart-icon" id="${item.id}">
+            <button class="add-to-favorites" id="${item.id}">
+            <img src="./images/heart.png" alt="" class="heart-icon" id="${item.id}">
+          </button>
+          
+          <h5 class="card-title">${item.productName}</h5>
+          <p class="card-text">${item.productPrice}</p>
+          <span class="card-text">${item.productAddres}</span>
 
-    </button>
-              <h5 class="card-title">${item.productName}</h5>
-              <p class="card-text">${item.productPrice}</p>
-              <span class="card-text">${item.productAddres}</span>
-              <div>
-                <button class="btn btn-outline-danger btnDelete" id="${item.id}">Delete</button>
-                <button class="btn btn-outline-warning btnEdit" id="${item.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-                <button class="detailsCard btn btn btn-outline-warning">Details</button>
-                <button class="detailsCard btn ">Add cart</button>
-
-                
-              </div>
-            </div>
+          <!-- Кнопки "Удалить", "Изменить", "Подробнее", "Добавить в корзину" -->
+          <div>
+            <button class="btn btn-outline-danger btnDelete" id="${item.id}">Delete</button>
+            <button class="btn btn-outline-warning btnEdit" id="${item.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+            <button class="detailsCard btn btn btn-outline-warning">Details</button>
+            <button class="detailsCard btn ">Add cart</button>
           </div>
-        `;
+        </div>
+      </div>
+    `;
       });
 
-      pageFunc(); // Вызываем функцию пагинации
+      pageFunc(); // Вызываем функцию для управления пагинацией
     } catch (error) {
-      console.error("Ошибка при загрузке продуктов:", error);
+      console.error("Ошибка при загрузке продуктов:", error); // Выводим ошибку в консоль, если есть проблемы при получении продуктов
     }
   }
 
-  readProducts(); // Вызываем функцию для отображения продуктов
+  readProducts(); // Вызываем функцию для отображения продуктов сразу после ее определения
 
   //!REGISTRATION==================================================
-  const registrationIcon = document.getElementById("registrationIcon");
-  const registrationModal = document.getElementById("registrationModal");
-  const closeBtn3 = document.querySelector(".close3");
+  const registrationIcon = document.getElementById("registrationIcon"); // Получаем ссылку на элемент с id "registrationIcon"
+  const registrationModal = document.getElementById("registrationModal"); // Получаем ссылку на элемент с id "registrationModal"
+  const closeBtn3 = document.querySelector(".close3"); // Получаем ссылку на первый элемент с классом "close3"
 
   // Обработчик события для кнопки закрытия модального окна
   closeBtn3.addEventListener("click", function () {
-    closeRegistrationModal();
-  });
-  registrationIcon.addEventListener("click", function (event) {
-    event.preventDefault();
-    alert("Registration logic goes here!");
+    closeRegistrationModal(); // Вызываем функцию для закрытия модального окна
   });
 
+  // Обработчик события для иконки регистрации
+  registrationIcon.addEventListener("click", function (event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+    alert("Registration logic goes here!"); // Выводим сообщение с логикой регистрации (здесь можно добавить реальную логику)
+  });
+
+  // Функция для открытия модального окна регистрации
   function openRegistrationModal() {
-    registrationModal.style.display = "block";
+    registrationModal.style.display = "block"; // Устанавливаем стиль отображения "block", чтобы показать модальное окно
   }
 
+  // Функция для закрытия модального окна регистрации
   function closeRegistrationModal() {
-    registrationModal.style.display = "none";
+    registrationModal.style.display = "none"; // Устанавливаем стиль отображения "none", чтобы скрыть модальное окно
   }
 
+  // Обработчик события для открытия модального окна регистрации при клике на иконку регистрации
   registrationIcon.addEventListener("click", function (event) {
-    event.preventDefault();
-    openRegistrationModal();
+    event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+    openRegistrationModal(); // Вызываем функцию для открытия модального окна
   });
 
-  const registrationForm = document.getElementById("registrationForm");
+  const registrationForm = document.getElementById("registrationForm"); // Получаем ссылку на элемент с id "registrationForm"
   registrationForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
+    // Получаем значения из полей формы
     const name = document.getElementById("name").value;
     const address = document.getElementById("address").value;
     const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
 
+    // Сохраняем данные в локальное хранилище браузера
     localStorage.setItem("name", name);
     localStorage.setItem("address", address);
     localStorage.setItem("email", email);
     localStorage.setItem("phone", phone);
 
-    closeRegistrationModal();
+    closeRegistrationModal(); // Закрываем модальное окно после сохранения данных
   });
 
   //!================DELETE===============
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("btnDelete")) {
-      let del_id = e.target.id;
+      // Проверяем, было ли нажатие на элемент с классом "btnDelete"
+      let del_id = e.target.id; // Получаем id элемента, на который было совершено нажатие (id товара для удаления)
+
       fetch(`${API}/${del_id}`, {
-        method: "DELETE",
+        // Выполняем запрос к серверу для удаления товара по его id
+        method: "DELETE", // Используем метод DELETE для удаления
       })
         .then(() => {
-          readProducts();
+          readProducts(); // После успешного удаления товара, обновляем отображение списка продуктов
         })
         .catch((error) => {
-          console.error("Ошибка при удалении:", error);
+          console.error("Ошибка при удалении:", error); // В случае возникновения ошибки выводим сообщение об ошибке в консоль
         });
     }
   });
-  //!==============EDIT===================
-  const editInpName = document.querySelector("#editInpName");
-  const editInpPrice = document.querySelector("#editInpPrice");
-  const editInpImage = document.querySelector("#editInpImage");
-  const editInpAddress = document.querySelector("#editInpAddress");
-  const editBtnSave = document.getElementById("editBtnSave");
-  const editProductModal = document.getElementById("editProductModal");
-  const editCloseBtn = editProductModal.querySelector(".close");
 
+  //!==============EDIT===================
+  // Получаем ссылки на элементы DOM
+  const editInpName = document.querySelector("#editInpName"); // Поле ввода для имени продукта при редактировании
+  const editInpPrice = document.querySelector("#editInpPrice"); // Поле ввода для цены продукта при редактировании
+  const editInpImage = document.querySelector("#editInpImage"); // Поле ввода для изображения продукта при редактировании
+  const editInpAddress = document.querySelector("#editInpAddress"); // Поле ввода для адреса продукта при редактировании
+  const editBtnSave = document.getElementById("editBtnSave"); // Кнопка "Сохранить изменения" при редактировании
+  const editProductModal = document.getElementById("editProductModal"); // Модальное окно для редактирования продукта
+  const editCloseBtn = editProductModal.querySelector(".close"); // Кнопка "Закрыть" в модальном окне редактирования
+
+  // Обработчик события для кнопки "Редактировать" каждого продукта
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("btnEdit")) {
-      const edit_id = e.target.id;
+      // Проверяем, было ли нажатие на кнопку "Редактировать"
+      const edit_id = e.target.id; // Получаем id продукта, который нужно редактировать
+
+      // Получаем данные о продукте для редактирования
       fetch(`${API}/${edit_id}`)
         .then((res) => {
-          return res.json();
+          return res.json(); // Преобразуем полученный ответ в формат JSON
         })
         .then((data) => {
+          // Заполняем поля в модальном окне данными о продукте для редактирования
           editInpName.value = data.productName;
           editInpPrice.value = data.productPrice;
           editInpImage.value = data.productImage;
           editInpAddress.value = data.productAddress;
-          editBtnSave.setAttribute("data-id", data.id);
-          editProductModal.style.display = "block"; // Отображение модального окна при получении данных для редактирования
+          editBtnSave.setAttribute("data-id", data.id); // Устанавливаем data-id для сохранения id редактируемого продукта
+          editProductModal.style.display = "block"; // Отображаем модальное окно редактирования
         })
         .catch((error) => {
-          console.error("Ошибка при загрузке данных:", error);
+          console.error("Ошибка при загрузке данных:", error); // Обработка ошибки при получении данных для редактирования
         });
     }
   });
 
+  // Обработчик события для кнопки "Закрыть" в модальном окне редактирования
   editCloseBtn.addEventListener("click", function () {
-    editProductModal.style.display = "none";
+    editProductModal.style.display = "none"; // Скрываем модальное окно редактирования при клике на кнопку "Закрыть"
   });
 
-  // Обработчик события для кнопки "Save Changes" в модальном окне редактирования
+  // Обработчик события для кнопки "Сохранить изменения" в модальном окне редактирования
   editBtnSave.addEventListener("click", function () {
-    let id = editBtnSave.getAttribute("data-id");
+    let id = editBtnSave.getAttribute("data-id"); // Получаем id редактируемого продукта
     let editedProduct = {
       productName: editInpName.value,
       productPrice: editInpPrice.value,
       productImage: editInpImage.value,
       productAddress: editInpAddress.value,
     };
-    editProduct(editedProduct, id);
-    editProductModal.style.display = "none"; // Закрытие модального окна после сохранения изменений
+
+    editProduct(editedProduct, id); // Вызываем функцию для редактирования продукта
+    editProductModal.style.display = "none"; // Скрываем модальное окно после сохранения изменений
   });
 
+  // Функция для редактирования продукта
   async function editProduct(editedProduct, id) {
     try {
       let res = await fetch(`${API}/${id}`, {
-        method: "PATCH",
+        method: "PATCH", // Используем метод PATCH для обновления данных продукта
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
-        body: JSON.stringify(editedProduct),
+        body: JSON.stringify(editedProduct), // Отправляем данные для обновления в формате JSON
       });
 
       if (!res.ok) {
-        throw new Error("Failed to edit the product");
+        throw new Error("Failed to edit the product"); // В случае неудачи выбрасываем ошибку
       }
 
-      // Обновляем отображение продуктов после успешного редактирования
-      readProducts();
+      readProducts(); // Обновляем отображение продуктов после успешного редактирования
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error); // Выводим сообщение об ошибке в случае возникновения ошибки
     }
   }
 
-  readProducts();
+  readProducts(); // Вызываем функцию для начального отображения продуктов при загрузке страницы
+
   //!====================PAGINATION=======================
   function pageFunc() {
     fetch(`${API}?q=${searchValue}`)
@@ -317,79 +345,78 @@ document.addEventListener("DOMContentLoaded", function () {
         return res.json();
       })
       .then((data) => {
-        //записываем в переменную countPage = текушую страницу
-        countPage = Math.ceil(data.length / 4);
+        // Рассчитываем количество страниц путем деления общего количества элементов на количество элементов на странице
+        countPage = Math.ceil(data.length / 4); // Предполагается, что на каждой странице отображается по 4 элемента
       });
   }
-  //
+  
+  // Обработчик события для кнопки "Предыдущая страница"
   prevBtn.addEventListener("click", () => {
-    //проверяем на какой странице мы сейчас находимся
+    // Проверяем, если текущая страница <= 1, то выходим из функции
     if (currentPage <= 1) return;
-    currentPage--;
-    readProducts();
+    currentPage--; // Уменьшаем номер текущей страницы
+    readProducts(); // Обновляем отображение продуктов на новой странице
   });
+  
+  // Обработчик события для кнопки "Следующая страница"
   nextBtn.addEventListener("click", () => {
+    // Проверяем, если текущая страница >= общему количеству страниц, то выходим из функции
     if (currentPage >= countPage) return;
-    currentPage++;
-    readProducts();
+    currentPage++; // Увеличиваем номер текущей страницы
+    readProducts(); // Обновляем отображение продуктов на новой странице
   });
+  
 
-  // ! search
-  const searchIcon = document.getElementById("SearchIcon");
-  const searchInput = document.getElementById("searchInput");
-  // Объявление переменной в более глобальной области видимости
+  //!======================Search========================
+  // Получаем ссылки на элементы DOM
+const searchIcon = document.getElementById("SearchIcon"); // Иконка поиска
+const searchInput = document.getElementById("searchInput"); // Поле ввода для поиска
 
-  searchIcon.addEventListener("click", function () {
-    searchInput.classList.toggle("active");
-  });
+// Добавляем обработчик события при клике на иконку поиска
+searchIcon.addEventListener("click", function () {
+  searchInput.classList.toggle("active"); // При клике на иконку поиска переключаем класс "active" у поля ввода
+});
 
-  searchInput.addEventListener("keyup", function () {
-    searchValue = searchInput.value.toLowerCase();
-  });
+// Добавляем обработчик события при вводе символов в поле поиска
+searchInput.addEventListener("keyup", function () {
+  searchValue = searchInput.value.toLowerCase(); // Приводим значение в поле поиска к нижнему регистру и сохраняем в переменную searchValue
+});
 
-  searchInput.addEventListener("input", (e) => {
-    searchValue = e.target.value.trim();
-    currentPage = 1; // Сбрасываем страницу при вводе нового запроса
-
-    readProducts();
-  });
+// Добавляем обработчик события при вводе данных в поле поиска
+searchInput.addEventListener("input", (e) => {
+  searchValue = e.target.value.trim(); // Обновляем переменную searchValue при вводе данных в поле поиска
+  currentPage = 1; // Сбрасываем значение текущей страницы при начале нового поиска
+  readProducts(); // Вызываем функцию для отображения продуктов на основе нового поискового запроса
+});
 
   //!==========details=====================
 
-  document.addEventListener("click", async (e) => {
-    if (e.target.classList.contains("detailsCard")) {
-      const productId = e.target.id;
-      const data = await fetchDetails(productId);
-      displayDetails(data);
+  // Добавляем обработчик для родительского элемента, делегируем события от кнопок "Details"
+  document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("detailsCard")) {
+      const productId = event.target.id;
+      // Вызываем функцию, которая показывает детали для выбранного продукта
+      showProductDetails(productId);
     }
   });
-
-  document.getElementById("closeModalBtn").addEventListener("click", () => {
-    closeModal();
-  });
-
-  async function fetchDetails(id) {
-    try {
-      const response = await fetch(`${API}/${id}`);
-      if (!response.ok) {
-        throw new Error(`HTTP Error! Status ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching details:", error);
-      return null;
-    }
-  }
-
   function displayDetails(data) {
+    const detailsContainer = document.getElementById("detailsModalBody");
+
     if (data) {
-      // Update modal content
       detailsContainer.innerHTML = `
-        <span class="close4" id="closeModalBtn">&times;</span>
-        <img src="${data.productImage}" alt="" id="detailProductImage" />
-        <h2 id="detailProductName">${data.productName}</h2>
-        <span id="detailProductPrice">${data.productPrice}</span>
-        <p id="detailProductAddress">${data.productAddres}</p>
+      <div class="detailsCard card" style="width: 19rem">
+      <img
+        id="${data.id}"
+        src="${data.productImage}"
+        alt=""
+        class="card-img-top detailsCard"
+        style="height: 280px"
+      />
+      <div class="card-body">
+        <h5 class="card-title">${data.productName}</h5>
+        <p class="card-text">${data.productPrice}</p>
+        <span class="card-text">${data.productAddress}</span>
+        <div>
       `;
 
       document.getElementById("detailsModal").style.display = "block";
@@ -397,11 +424,44 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Details not available");
     }
   }
+
+  // Функция для закрытия модального окна с деталями
   function closeModal() {
     document.getElementById("detailsModal").style.display = "none";
   }
-  closeModal();
+
+  // Добавляем обработчик для родительского элемента, делегируем события от кнопок "Details"
+  document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("detailsCard")) {
+      const productId = event.target.id;
+      // Вызываем функцию, которая показывает детали для выбранного продукта
+      showProductDetails(productId);
+    }
+  });
+
+  // Функция, которая отображает детали для выбранного продукта
+  async function showProductDetails(productId) {
+    try {
+      const response = await fetch(`${API}/${productId}`);
+      const data = await response.json();
+
+      // Отобразить детали продукта в модальном окне или другом месте на странице
+      displayDetails(data);
+      console.log("Details for product:", data);
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  }
+
   //!===========favorites===========
+  // Обработчик события клика на кнопку "add-to-favorites"
+  document.querySelectorAll(".add-to-favorites").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const productId = event.target.id; // Получаем ID продукта из атрибута кнопки
+      addToFavorites(productId); // Добавляем продукт в избранное
+    });
+  });
+
   function addToFavorites(productId) {
     let favorites = localStorage.getItem("favorites");
 
@@ -411,7 +471,6 @@ document.addEventListener("DOMContentLoaded", function () {
       favorites = JSON.parse(favorites);
     }
 
-    // Проверяем, есть ли уже такой продукт в избранном
     if (!favorites.includes(productId)) {
       favorites.push(productId);
     }
@@ -419,78 +478,31 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
-  function removeFromFavorites(productId) {
-    let favorites = localStorage.getItem("favorites");
+  // Функция для отображения избранных продуктов в модальном окне
+  // Function to display favorite products
+  function displayFavoritesModal() {
+    const favorites = getFavorites(); // Retrieve favorite products from localStorage
 
-    if (favorites) {
-      favorites = JSON.parse(favorites);
+    const favoritesListElement = document.getElementById("favoritesList"); // Assuming you have an element with this ID to display favorites
 
-      const index = favorites.indexOf(productId);
-      if (index !== -1) {
-        favorites.splice(index, 1);
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-      }
-    }
-  }
-
-  function toggleFavorite(productId) {
-    let favorites = localStorage.getItem("favorites");
-
-    if (!favorites) {
-      favorites = [];
-    } else {
-      favorites = JSON.parse(favorites);
-    }
-
-    const index = favorites.indexOf(productId);
-
-    if (index === -1) {
-      // Продукт не в избранном, добавить его
-      favorites.push(productId);
-    } else {
-      // Продукт уже в избранном, удалить его
-      favorites.splice(index, 1);
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
-  // Функция для получения избранных продуктов
-  function getFavorites() {
-    const favorites = localStorage.getItem("favorites");
-    return favorites ? JSON.parse(favorites) : [];
-  }
-
-  function displayFavorites() {
-    const favorites = getFavorites(); // Получаем список избранных продуктов
-    const favoritesListElement = document.getElementById("favoritesList");
-
-    // Очищаем содержимое перед добавлением новой информации
+    // Clear the content before adding new information
     favoritesListElement.innerHTML = "";
 
     favorites.forEach((productId) => {
-      // Проверяем, существует ли информация о продукте в объекте sectionProducts по его ID
+      // Assuming sectionProducts is defined and contains product information
       if (sectionProducts.hasOwnProperty(productId)) {
-        // Для каждого избранного продукта создаем HTML-элементы для отображения информации
-        const productInfoElement = document.createElement("div");
-
-        // Получаем информацию о продукте по его ID из объекта sectionProducts
         const productData = sectionProducts[productId];
 
-        // Проверяем, существует ли необходимая информация о продукте
         if (productData) {
-          // Создаем HTML для отображения информации о продукте
           const productHTML = `
             <div class="product">
               <h3>${productData.productName}</h3>
               <p>Price: ${productData.productPrice}</p>
               <img src="${productData.productImage}" alt="${productData.productName}" />
               <p>Address: ${productData.productAddress}</p>
-              <!-- Другие детали или информация о продукте, которые вы хотите отобразить -->
             </div>
           `;
 
-          // Добавляем созданный HTML для каждого продукта в блок favoritesListElement
           favoritesListElement.innerHTML += productHTML;
         }
       }
@@ -499,11 +511,17 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Избранные продукты:", favorites);
   }
 
-  const favoritedIcon = document.getElementById("favorited");
+  // This section should be triggered by some user action, e.g., a click on a button to show favorites
+  // For instance, assume there's a button or an element with the ID "showFavoritesButton"
+  const showFavoritesButton = document.getElementById("favorites");
+  showFavoritesButton.addEventListener("click", displayFavoritesModal);
 
-  favoritedIcon.addEventListener("click", () => {
-    displayFavorites();
-  });
+  // Function to retrieve favorites from localStorage
+  function getFavorites() {
+    const favorites = localStorage.getItem("favorites");
+    return favorites ? JSON.parse(favorites) : [];
+  }
+
   //!=========================BASKET==============================
   // Выбор соответствующих элементов
   //   const basketIcon = document.getElementById("basket");
@@ -580,7 +598,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //   checkoutButton.addEventListener("click", () => {
   // Реализуйте ваш процесс оформления заказа
   //   });
-  // Получение ссылок на элементы навигации
+  //! Получение ссылок на элементы навигации
   const homeLink = document.querySelector('a[href="#home"]');
   const shopLink = document.querySelector('a[href="#shop"]');
 
@@ -621,5 +639,31 @@ document.addEventListener("DOMContentLoaded", function () {
         behavior: "smooth",
       });
     });
+  });
+  //!===================contact us==========
+  const contactForm = document.getElementById("contact");
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+
+    // Получаем ссылки на поля формы
+    const usernameField = document.getElementById("username");
+    const passwordField = document.getElementById("password");
+    const messageField = document.getElementById("message");
+
+    // Получаем значения из полей формы
+    const username = usernameField.value;
+    const password = passwordField.value;
+    const message = messageField.value;
+
+    // Сохраняем данные в localStorage
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    localStorage.setItem("message", message);
+
+    // Очистка содержимого формы
+    usernameField.value = ""; // Очистка поля "Username"
+    passwordField.value = ""; // Очистка поля "Password"
+    messageField.value = ""; // Очистка поля "Message"
   });
 });
