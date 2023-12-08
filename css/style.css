@@ -108,7 +108,7 @@
 
   /* Добавление отступа сверху между кнопками и содержимым */
 }
-
+.btnBuy,
 .btnAdd:not(.heart-icon) {
   padding: 25px 40px;
   gap: 10px;
@@ -126,9 +126,8 @@
   margin-top: 20px; /* Удаление верхнего отступа у кнопок */
   border-radius: 15px;
 }
-
-.btnAdd:hover {
-  /* ... (ваш текущий стиль для состояния hover) ... */
+.btnBuy .btnAdd:hover {
+  
   background-color: #ffe600;
   cursor: pointer;
 }
